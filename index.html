@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Sales Stack — Данил Усик</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0b1120;
+  --surface: #111827;
+  --card:    #1a2540;
+  --border:  rgba(255,255,255,0.07);
+  --blue:    #3b82f6;
+  --green:   #10b981;
+  --amber:   #f59e0b;
+  --purple:  #8b5cf6;
+  --text:    #f1f5f9;
+  --muted:   #64748b;
+  --subtle:  #94a3b8;
+  --radius:  14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
+.container { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+/* HERO */
+.hero { padding: 72px 0 56px; text-align: center; }
+.eyebrow { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 20px; }
+.hero h1 { font-size: 38px; font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 18px; }
+.hero h1 em { font-style: normal; color: var(--blue); }
+.hero-sub { font-size: 17px; color: var(--subtle); max-width: 520px; margin: 0 auto 40px; line-height: 1.65; }
+
+/* STAT ROW */
+.stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 72px; }
+.stat { text-align: center; }
+.stat-num { font-size: 32px; font-weight: 800; color: var(--amber); letter-spacing: -0.03em; }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* SECTION */
+.section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+.s-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.s-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.015em; }
+.s-sub { color: var(--subtle); font-size: 15px; margin-bottom: 36px; max-width: 560px; }
+
+/* PROCESS STEPS */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step { display: grid; grid-template-columns: 52px 1fr; gap: 0 20px; position: relative; }
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 25px;
+  top: 52px;
+  bottom: -20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--border), transparent);
+}
+.step + .step { margin-top: 20px; }
+.step-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  border: 1px solid;
+}
+.step-icon.blue   { background: rgba(59,130,246,0.12);  border-color: rgba(59,130,246,0.3); }
+.step-icon.green  { background: rgba(16,185,129,0.12);  border-color: rgba(16,185,129,0.3); }
+.step-icon.amber  { background: rgba(245,158,11,0.12);  border-color: rgba(245,158,11,0.3); }
+.step-icon.purple { background: rgba(139,92,246,0.12);  border-color: rgba(139,92,246,0.3); }
+.step-icon.teal   { background: rgba(20,184,166,0.12);  border-color: rgba(20,184,166,0.3); }
+.step-icon.rose   { background: rgba(244,63,94,0.12);   border-color: rgba(244,63,94,0.3); }
+.step-body { padding-bottom: 28px; }
+.step-num { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.step-name { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.step-desc { font-size: 13.5px; color: var(--subtle); line-height: 1.6; margin-bottom: 10px; }
+.step-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.tool-tag {
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--subtle);
+}
+.tool-tag.blue   { background: rgba(59,130,246,0.1);  border-color: rgba(59,130,246,0.25); color: #93c5fd; }
+.tool-tag.green  { background: rgba(16,185,129,0.1);  border-color: rgba(16,185,129,0.25); color: #6ee7b7; }
+.tool-tag.amber  { background: rgba(245,158,11,0.1);  border-color: rgba(245,158,11,0.25); color: #fcd34d; }
+.tool-tag.purple { background: rgba(139,92,246,0.1);  border-color: rgba(139,92,246,0.25); color: #c4b5fd; }
+.step-time { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+/* STACK TABLE */
+.stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stack-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+.stack-role { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.stack-tool { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.stack-desc { font-size: 12.5px; color: var(--subtle); line-height: 1.5; }
+
+/* BEFORE AFTER */
+.ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ba-col { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
+.ba-col.after { border-color: rgba(16,185,129,0.3); }
+.ba-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+.ba-col:not(.after) .ba-label { color: var(--muted); }
+.ba-col.after .ba-label { color: var(--green); }
+.ba-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; font-size: 13.5px; color: var(--subtle); line-height: 1.5; }
+.ba-item::before { content: '✕'; color: #ef4444; flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+.ba-col.after .ba-item::before { content: '✓'; color: var(--green); }
+
+/* TIME COMPARISON */
+.time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 28px; }
+.time-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-align: center; }
+.time-card.highlight { border-color: rgba(16,185,129,0.3); }
+.time-stage { font-size: 11px; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+.time-before { font-size: 13px; color: #ef4444; text-decoration: line-through; margin-bottom: 4px; }
+.time-after  { font-size: 18px; font-weight: 800; color: var(--green); }
+
+/* INSIGHT CALLOUT */
+.insight { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); border-radius: var(--radius); padding: 24px 28px; margin-top: 36px; }
+.insight-label { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.insight p { font-size: 16px; color: var(--text); line-height: 1.65; font-style: italic; }
+.insight cite { display: block; margin-top: 10px; font-size: 13px; color: var(--muted); font-style: normal; }
+
+/* TRACKING DEMO */
+.tracking-demo { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 28px; }
+.tg-header { background: rgba(255,255,255,0.04); padding: 12px 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+.tg-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.tg-name { font-size: 13px; font-weight: 600; }
+.tg-status { font-size: 11px; color: var(--green); }
+.tg-messages { padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+.tg-msg { display: flex; gap: 10px; align-items: flex-start; }
+.tg-bubble {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px 12px 12px 4px;
+  padding: 9px 13px;
+  font-size: 13px; line-height: 1.5; max-width: 380px;
+}
+.tg-bubble .tg-time { font-size: 10px; color: var(--muted); margin-top: 4px; display: block; }
+.tg-bubble.ping { border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.06); }
+.tg-bubble.confirm { border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.06); }
+
+/* CTA */
+.cta-section { padding: 64px 0; text-align: center; }
+.cta-title { font-size: 28px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
+.cta-sub { font-size: 16px; color: var(--subtle); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--blue); color: #fff; text-decoration: none;
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 15px; font-weight: 700;
+  box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(59,130,246,0.45); }
+.cta-note { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 26px; }
+  .stats { gap: 28px; }
+  .stack-grid { grid-template-columns: 1fr; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .time-grid { grid-template-columns: 1fr 1fr; }
+  .step { grid-template-columns: 44px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="eyebrow">Practical AI · Данил Усик</div>
+    <h1>Я не держу клиентов<br>в голове. <em>Система держит.</em></h1>
+    <p class="hero-sub">Как AI изменил мой процесс B2B-продаж — от первого контакта до подписанного договора</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">встречи</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">стейкхолдеров</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">~6ч</div>
+        <div class="stat-label">вместо 2–3 дней</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">23:47</div>
+        <div class="stat-label">клиент нажал «подтвердить»</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="section">
+  <div class="container">
+    <div class="s-label">Процесс</div>
+    <h2 class="s-title">6 шагов от лида до КП</h2>
+    <p class="s-sub">Каждый шаг повторяется для любого клиента — система одна, контент разный</p>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-icon blue">🎯</div>
+        <div class="step-body">
+          <div class="step-num">Шаг 1</div>
+          <div class="step-name">ICP и исследование</div>
+          <div class="step-desc">Перед первым контактом — 20 минут исследования. Индустрия клиента, боли, триггеры покупки, профиль ЛПР. Не чтобы выглядеть умным — чтобы задавать правильные вопросы с первой минуты.</div>
+          <div class="step-tools">
+            <span class="tool-tag blue">Claude</span>
+            <span class="tool-tag">Gemini</span>
+            <span class="tool-tag">LinkedIn</span>
+          </div>
+          <div class="step-time">⏱ 15–20 мин</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon purple">✉️</div>
+        <div class="step-body">
+          <div class="step-num">Шаг 2</div>
+          <div class="step-name">Первый контакт</div>
+          <div class="step-desc">Холодное сообщение пишется за 10 минут. Хук — из их мира, не из нашего. Один вопрос про их опыт, один релевантный кейс. Цель первого сообщения: ответ, не звонок.</div>
+          <div class="step-tools">
+            <span class="tool-tag purple">/outreach скилл</span>
+            <span class="tool-tag blue">Claude</span>
+          </div>
+          <div class="step-time">⏱ 10 мин</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon amber">📋</div>
+        <div class="step-body">
+          <div class="step-num">Шаг 3</div>
+          <div class="step-name">Подготовка к встрече</div>
+          <div class="step-desc">Для каждой встречи — отдельный файл в Obsidian. Кто придёт, что знаем о каждом, открывающая фраза дословно, диагностические вопросы под каждого стейкхолдера. Я захожу подготовленным — даже если пришло 6 человек вместо 2.</div>
+          <div class="step-tools">
+            <span class="tool-tag amber">Obsidian</span>
+            <span class="tool-tag blue">Claude Code</span>
+          </div>
+          <div class="step-time">⏱ 20–30 мин</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon green">🎙️</div>
+        <div class="step-body">
+          <div class="step-num">Шаг 4</div>
+          <div class="step-name">Встреча + память</div>
+          <div class="step-desc">Fathom транскрибирует каждое слово. Хранится локально — не в облаке. После встречи я спрашиваю: «Что именно сказал Никита про аналитику?» — и получаю ответ за 10 секунд. Контекст не теряется никогда.</div>
+          <div class="step-tools">
+            <span class="tool-tag green">Fathom</span>
+            <span class="tool-tag blue">Claude Code (локально)</span>
+          </div>
+          <div class="step-time">⏱ по встрече + 15 мин после</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon teal">🔍</div>
+        <div class="step-body">
+          <div class="step-num">Шаг 5</div>
+          <div class="step-name">Анализ сделки</div>
+          <div class="step-desc">Если встреча была сложной — консилиум: 6 независимых AI-ролей (Sales Strategist, Risk Officer, Devil's Advocate, Customer Proxy и др.) анализируют сделку независимо. Вероятность, открытые риски, план на следующий шаг — за 5 минут.</div>
+          <div class="step-tools">
+            <span class="tool-tag purple">/consilium скилл</span>
+            <span class="tool-tag">/crm скилл</span>
+          </div>
+          <div class="step-time">⏱ 5–10 мин</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon rose">📄</div>
+        <div class="step-body">
+          <div class="step-num">Шаг 6</div>
+          <div class="step-name">Персональный КП</div>
+          <div class="step-desc">КП собирается из слов клиента, не из шаблона. HTML-страница с живым демо, аудио-агентом, калькулятором OPEX на их цифрах. Telegram-трекинг: знаю когда открыли, дошли до цен, нажали «подтвердить». Кнопка подтверждения — пинг мне + Google Calendar.</div>
+          <div class="step-tools">
+            <span class="tool-tag blue">/kp скилл</span>
+            <span class="tool-tag green">GitHub Pages</span>
+            <span class="tool-tag">Telegram Bot</span>
+          </div>
+          <div class="step-time">⏱ 2–4 часа (первый) / 45 мин (повторные)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRACKING DEMO -->
+<section class="section">
+  <div class="container">
+    <div class="s-label">Артефакт</div>
+    <h2 class="s-title">Что я вижу когда клиент читает КП</h2>
+    <p class="s-sub">Статическая HTML-страница + Telegram Bot + Intersection Observer. Никаких внешних сервисов.</p>
+
+    <div class="tracking-demo">
+      <div class="tg-header">
+        <div class="tg-avatar">🤖</div>
+        <div>
+          <div class="tg-name">KP Tracker</div>
+          <div class="tg-status">● online</div>
+        </div>
+      </div>
+      <div class="tg-messages">
+        <div class="tg-msg">
+          <div class="tg-bubble ping">
+            📄 Открыл КП
+            <span class="tg-time">23:31</span>
+          </div>
+        </div>
+        <div class="tg-msg">
+          <div class="tg-bubble ping">
+            👀 Посмотрел демо
+            <span class="tg-time">23:34</span>
+          </div>
+        </div>
+        <div class="tg-msg">
+          <div class="tg-bubble ping">
+            🎙 Слушал голосовое демо
+            <span class="tg-time">23:38</span>
+          </div>
+        </div>
+        <div class="tg-msg">
+          <div class="tg-bubble ping">
+            💰 Дошёл до цен
+            <span class="tg-time">23:41</span>
+          </div>
+        </div>
+        <div class="tg-msg">
+          <div class="tg-bubble ping">
+            📈 Дошёл до раздела «Что меняется»
+            <span class="tg-time">23:44</span>
+          </div>
+        </div>
+        <div class="tg-msg">
+          <div class="tg-bubble confirm">
+            ✅ Артём нажал «Подтвердить встречу»
+            <span class="tg-time">23:47</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="section">
+  <div class="container">
+    <div class="s-label">Разница</div>
+    <h2 class="s-title">Было / Стало</h2>
+
+    <div class="ba-grid">
+      <div class="ba-col">
+        <div class="ba-label">Раньше</div>
+        <div class="ba-item">Контекст клиента — в голове. Забываешь детали между встречами</div>
+        <div class="ba-item">PDF отправлен. Тишина. Гадаешь — читали или нет</div>
+        <div class="ba-item">Подготовка к встрече — 45 минут листания записей</div>
+        <div class="ba-item">КП — шаблон с подставленным именем клиента</div>
+        <div class="ba-item">Анализ сделки — интуиция и прошлый опыт</div>
+      </div>
+      <div class="ba-col after">
+        <div class="ba-label">Сейчас</div>
+        <div class="ba-item">Система помнит каждое слово каждой встречи</div>
+        <div class="ba-item">Знаю в реальном времени: открыл / дошёл до цен / нажал подтвердить</div>
+        <div class="ba-item">Obsidian-файл со скриптом готов за 20 минут</div>
+        <div class="ba-item">КП построен из слов клиента — они узнают свои формулировки</div>
+        <div class="ba-item">6 независимых экспертных ролей — анализ за 5 минут</div>
+      </div>
+    </div>
+
+    <div class="time-grid">
+      <div class="time-card">
+        <div class="time-stage">Исследование</div>
+        <div class="time-before">1–2 часа</div>
+        <div class="time-after">20 мин</div>
+      </div>
+      <div class="time-card">
+        <div class="time-stage">Подготовка к встрече</div>
+        <div class="time-before">45 мин</div>
+        <div class="time-after">20 мин</div>
+      </div>
+      <div class="time-card">
+        <div class="time-stage">Сборка КП</div>
+        <div class="time-before">1–2 дня</div>
+        <div class="time-after">2–4 часа</div>
+      </div>
+      <div class="time-card highlight">
+        <div class="time-stage">Итого на сделку</div>
+        <div class="time-before">~3 дня</div>
+        <div class="time-after">~6 часов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHT -->
+<section class="section">
+  <div class="container">
+    <div class="s-label">Главный инсайт</div>
+    <h2 class="s-title">Я перестал продавать.<br>Я начал задавать вопросы.</h2>
+    <p class="s-sub">Система помнит всё. Моя работа — слышать что за вопросами стоит.</p>
+
+    <div class="insight">
+      <div class="insight-label">Из практики</div>
+      <p>«Я плохо запоминаю имена. Забываю детали разговоров. Не могу держать в голове контекст пяти клиентов одновременно. И при этом клиенты говорят что я знаю их бизнес лучше, чем они сами.»</p>
+      <cite>— Данил Усик, CEO Practical AI</cite>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="section">
+  <div class="container">
+    <div class="s-label">Стек инструментов</div>
+    <h2 class="s-title">Что конкретно использую</h2>
+
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-role">Исследование клиента</div>
+        <div class="stack-tool">Claude + Gemini</div>
+        <div class="stack-desc">Профиль компании, боли индустрии, профиль ЛПР — за 15 минут</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Холодный аутрич</div>
+        <div class="stack-tool">/outreach скилл (Claude)</div>
+        <div class="stack-desc">Персонализированное сообщение за 10 минут вместо 45</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Транскрипция встреч</div>
+        <div class="stack-tool">Fathom</div>
+        <div class="stack-desc">Локально, не в облаке. Безопасно. Каждое слово сохранено</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Память и контекст</div>
+        <div class="stack-tool">Claude Code (VSCode)</div>
+        <div class="stack-desc">Читает все файлы, знает историю каждого клиента, отвечает за 10 секунд</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Подготовка к встречам</div>
+        <div class="stack-tool">Obsidian + Claude</div>
+        <div class="stack-desc">Скрипт, вопросы, FAQ — файл на каждую встречу с каждым клиентом</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Коммерческое предложение</div>
+        <div class="stack-tool">/kp скилл → GitHub Pages</div>
+        <div class="stack-desc">HTML с трекингом, демо, аудио, калькулятором. Ссылка вместо PDF</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Трекинг КП</div>
+        <div class="stack-tool">Telegram Bot</div>
+        <div class="stack-desc">Открыл / дошёл до цен / нажал подтвердить — в реальном времени</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-role">Анализ сделки</div>
+        <div class="stack-tool">/consilium скилл</div>
+        <div class="stack-desc">6 независимых ролей: вероятность, риски, следующий шаг — за 5 минут</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="cta-title">Хотите анкету которую я<br>заполняю перед каждой встречей?</h2>
+    <p class="cta-sub">30 вопросов, 7 блоков. Всё что нужно чтобы прийти на встречу и знать больше клиента о его же проблеме.</p>
+    <a href="https://t.me/danilusik" class="cta-btn" target="_blank">
+      ✈️ Написать в Telegram
+    </a>
+    <p class="cta-note">Пришлю шаблон — бесплатно. Без регистрации и звонков.</p>
+    <p class="cta-note" style="margin-top:28px; font-size:12px;">
+      <strong style="color:var(--subtle);">Данил Усик</strong> · CEO Practical AI · practicalai.es · Valencia, Spain
+    </p>
+  </div>
+</section>
+
+</body>
+</html>
