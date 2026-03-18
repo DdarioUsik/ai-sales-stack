@@ -165,12 +165,16 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 </head>
 <body>
 
-<!-- HERO -->
+<!-- HERO PERSONAL -->
 <div class="hero">
   <div class="container">
-    <div class="eyebrow">Practical AI · Данил Усик</div>
-    <h1>Я не держу клиентов<br>в голове. <em>Система держит.</em></h1>
-    <p class="hero-sub">Как AI изменил мой процесс B2B-продаж — от первого контакта до подписанного договора</p>
+    <div class="eyebrow">Practical AI · Данил Усик · CEO</div>
+    <h1>У меня плохая память.<br><em>Поэтому я построил систему.</em></h1>
+    <p class="hero-sub" style="max-width:600px;">Серьёзно — я теряю детали разговоров, забываю имена, не помню что кто сказал три недели назад. И при этом клиенты говорят что я знаю их бизнес лучше, чем они сами.</p>
+
+    <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:0 var(--radius) var(--radius) 0; padding:18px 22px; margin-bottom:36px; max-width:600px; text-align:left;">
+      <div style="font-size:14px; color:var(--subtle); line-height:1.7;">Я единственный сейлз в компании. Провожу диагностику, веду переговоры, собираю КП, закрываю сделки. Параллельно — стратегия, продукт, команда. Моя реальная боль: удерживать контекст пяти клиентов одновременно, не теряя ни одного.<br><br>Я перестал пытаться. Вместо этого — построил систему которая помнит всё. А сам занимаюсь единственным что AI пока не умеет: <strong style="color:var(--text);">задавать правильные вопросы и слышать что за ними стоит.</strong></div>
+    </div>
 
     <div class="stats">
       <div class="stat">
@@ -182,12 +186,12 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
         <div class="stat-label">стейкхолдеров</div>
       </div>
       <div class="stat">
-        <div class="stat-num">~6ч</div>
-        <div class="stat-label">вместо 2–3 дней</div>
+        <div class="stat-num">13</div>
+        <div class="stat-label">рабочих дней</div>
       </div>
       <div class="stat">
         <div class="stat-num">23:47</div>
-        <div class="stat-label">клиент нажал «подтвердить»</div>
+        <div class="stat-label">подтвердил встречу</div>
       </div>
     </div>
   </div>
@@ -424,6 +428,120 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
   </div>
 </section>
 
+<!-- SYSTEM ARCHITECTURE -->
+<section class="section">
+  <div class="container">
+    <div class="s-label">Архитектура системы</div>
+    <h2 class="s-title">Как это устроено изнутри</h2>
+    <p class="s-sub">От первого контакта до подписанного договора — один поток, ноль ручного контекста</p>
+
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:28px; overflow-x:auto; margin-top:8px;">
+      <!-- FLOW DIAGRAM -->
+      <div style="display:flex; flex-direction:column; gap:0; min-width:500px;">
+
+        <!-- Row 1: Input -->
+        <div style="display:flex; align-items:center; gap:0; margin-bottom:0;">
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#93c5fd;">🧑 Лид</div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#93c5fd;">🔍 Ресёрч<br><span style="font-weight:400; color:var(--muted);">Claude + Gemini</span></div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(139,92,246,0.12); border:1px solid rgba(139,92,246,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#c4b5fd;">✉️ Аутрич<br><span style="font-weight:400; color:var(--muted);">/outreach</span></div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#fcd34d;">📅 Встреча<br><span style="font-weight:400; color:var(--muted);">Fathom → локально</span></div>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div style="display:flex; padding:4px 0;">
+          <div style="flex:4;"></div>
+          <div style="flex:0.15; display:flex; justify-content:center;">
+            <div style="width:2px; height:24px; background:var(--border);"></div>
+          </div>
+          <div style="flex:1.85;"></div>
+        </div>
+
+        <!-- Row 2: Memory -->
+        <div style="display:flex; align-items:center; gap:0; margin-bottom:0;">
+          <div style="text-align:center; flex:1.5; margin-right:6px;">
+            <div style="background:rgba(59,130,246,0.06); border:1px dashed rgba(59,130,246,0.2); border-radius:10px; padding:10px; font-size:11px; color:var(--muted); line-height:1.5;">
+              <strong style="color:var(--subtle); display:block; margin-bottom:4px;">🧠 Память (локально)</strong>
+              CONTEXT.md · transcripts · meeting notes · questionnaires
+            </div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">←→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#6ee7b7;">🤖 Claude Code<br><span style="font-weight:400; color:var(--muted);">VSCode · читает всё</span></div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#fcd34d;">📋 Prep<br><span style="font-weight:400; color:var(--muted);">Obsidian файл</span></div>
+          </div>
+        </div>
+
+        <!-- Connector -->
+        <div style="display:flex; padding:4px 0;">
+          <div style="flex:2.8;"></div>
+          <div style="flex:0.15; display:flex; justify-content:center;">
+            <div style="width:2px; height:24px; background:var(--border);"></div>
+          </div>
+          <div style="flex:2.05;"></div>
+        </div>
+
+        <!-- Row 3: Output -->
+        <div style="display:flex; align-items:center; gap:0;">
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(139,92,246,0.12); border:1px solid rgba(139,92,246,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#c4b5fd;">🔬 Консилиум<br><span style="font-weight:400; color:var(--muted);">6 ролей / 5 мин</span></div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#6ee7b7;">📄 /kp скилл<br><span style="font-weight:400; color:var(--muted);">HTML КП</span></div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#6ee7b7;">🔗 GitHub Pages<br><span style="font-weight:400; color:var(--muted);">ссылка клиенту</span></div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding:0 6px;">→</div>
+          <div style="text-align:center; flex:1;">
+            <div style="background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.5); border-radius:10px; padding:12px 10px; font-size:12px; font-weight:700; color:#34d399;">✅ Трекинг<br><span style="font-weight:400; color:var(--muted);">→ Telegram 23:47</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Terminal style callout -->
+    <div style="background:#0d1117; border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius); padding:20px 24px; margin-top:16px; font-family:'Courier New', monospace;">
+      <div style="display:flex; gap:8px; margin-bottom:14px;">
+        <div style="width:12px; height:12px; border-radius:50%; background:#ff5f57;"></div>
+        <div style="width:12px; height:12px; border-radius:50%; background:#febc2e;"></div>
+        <div style="width:12px; height:12px; border-radius:50%; background:#28c840;"></div>
+        <span style="font-size:12px; color:#6e7681; margin-left:8px;">claude-code — ~/sales-pipeline</span>
+      </div>
+      <div style="font-size:13px; line-height:2; color:#e6edf3;">
+        <span style="color:#7ee787;">→</span> <span style="color:#79c0ff;">/kp</span> <span style="color:#e6edf3;">АудиоРитейл</span><br>
+        <span style="color:#8b949e;">✓ Читаю папку клиента... 4 встречи, 2 анкеты, 14 заметок</span><br>
+        <span style="color:#8b949e;">✓ Главная боль: 90% чеков анонимные, нет CTO, 4 провала CRM</span><br>
+        <span style="color:#8b949e;">✓ Кейс-якорь: отель (+42% бронирований) → premium retail</span><br>
+        <span style="color:#7ee787;">→</span> <span style="color:#e6edf3;">Собираю HTML КП из слов клиента...</span><br>
+        <span style="color:#8b949e;">✓ Hero: "Клиент написал → нет ответа → звонит → пишет в Instagram"</span><br>
+        <span style="color:#8b949e;">✓ OPEX калькулятор: 5000 диалогов × $0.05 = $270/мес</span><br>
+        <span style="color:#8b949e;">✓ Telegram tracking подключён</span><br>
+        <span style="color:#7ee787;">→</span> <span style="color:#e6edf3;">Деплой на GitHub Pages...</span><br>
+        <span style="color:#3fb950;">✓ Готово: ddariousik.github.io/drhead-kp/</span><br>
+        <span style="color:#3fb950;">✓ Уведомление отправлено в Telegram</span><br>
+        <span style="color:#8b949e; font-size:11px;">Время: 2ч 14мин → обычно занимает 1-2 дня</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- BEFORE / AFTER -->
 <section class="section">
   <div class="container">
@@ -543,13 +661,17 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 <!-- CTA -->
 <section class="cta-section">
   <div class="container">
-    <h2 class="cta-title">Хотите анкету которую я<br>заполняю перед каждой встречей?</h2>
-    <p class="cta-sub">30 вопросов, 7 блоков. Всё что нужно чтобы прийти на встречу и знать больше клиента о его же проблеме.</p>
+    <h2 class="cta-title">Хотите так же?</h2>
+    <p class="cta-sub">Напишите мне в Telegram. Пришлю шаблон анкеты которую я заполняю перед каждой встречей — бесплатно, без питча.</p>
     <a href="https://t.me/danilusik" class="cta-btn" target="_blank">
-      ✈️ Написать в Telegram
+      ✈️ @danilusik
     </a>
-    <p class="cta-note">Пришлю шаблон — бесплатно. Без регистрации и звонков.</p>
-    <p class="cta-note" style="margin-top:28px; font-size:12px;">
+    <p class="cta-note" style="margin-top:16px;">Напишите <strong style="color:var(--subtle);">«анкета»</strong> — пришлю файл. Никакого звонка.</p>
+    <div style="margin-top:32px; padding-top:24px; border-top:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:6px;">
+      <div style="font-size:13px; color:var(--muted);">AI Garage · Валенсия · 23 марта · 19:00</div>
+      <div style="font-size:12px; color:var(--muted);">Разбираем этот кейс вживую · 12 мест</div>
+    </div>
+    <p class="cta-note" style="margin-top:20px; font-size:12px;">
       <strong style="color:var(--subtle);">Данил Усик</strong> · CEO Practical AI · practicalai.es · Valencia, Spain
     </p>
   </div>
