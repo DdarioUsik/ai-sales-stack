@@ -300,46 +300,27 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
 <section class="section">
   <div class="container">
     <div class="s-label">Артефакт</div>
-    <h2 class="s-title">Что я вижу когда клиент читает КП</h2>
-    <p class="s-sub">Статическая HTML-страница + Telegram Bot + Intersection Observer. Никаких внешних сервисов.</p>
+    <h2 class="s-title">КП которое закрывает само</h2>
+    <p class="s-sub">Клиент читает когда готов — не когда ему удобно отвечать на «вы получили наше предложение?». Я узнаю только когда он сам нажимает «подтвердить».</p>
 
     <div class="tracking-demo">
       <div class="tg-header">
         <div class="tg-avatar">🤖</div>
         <div>
-          <div class="tg-name">KP Tracker</div>
+          <div class="tg-name">КП · АудиоРитейл</div>
           <div class="tg-status">● online</div>
         </div>
       </div>
       <div class="tg-messages">
         <div class="tg-msg">
           <div class="tg-bubble ping">
-            📄 Открыл КП
-            <span class="tg-time">23:31</span>
+            📄 Ссылка на КП отправлена
+            <span class="tg-time">22:15</span>
           </div>
         </div>
-        <div class="tg-msg">
-          <div class="tg-bubble ping">
-            👀 Посмотрел демо
-            <span class="tg-time">23:34</span>
-          </div>
-        </div>
-        <div class="tg-msg">
-          <div class="tg-bubble ping">
-            🎙 Слушал голосовое демо
-            <span class="tg-time">23:38</span>
-          </div>
-        </div>
-        <div class="tg-msg">
-          <div class="tg-bubble ping">
-            💰 Дошёл до цен
-            <span class="tg-time">23:41</span>
-          </div>
-        </div>
-        <div class="tg-msg">
-          <div class="tg-bubble ping">
-            📈 Дошёл до раздела «Что меняется»
-            <span class="tg-time">23:44</span>
+        <div class="tg-msg" style="opacity:0.35; font-style:italic;">
+          <div class="tg-bubble" style="font-size:12px; color:var(--muted);">
+            — — — я уже сплю — — —
           </div>
         </div>
         <div class="tg-msg">
@@ -349,6 +330,10 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--tex
           </div>
         </div>
       </div>
+    </div>
+
+    <div style="margin-top:20px; background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2); border-radius:10px; padding:16px 20px; font-size:13.5px; color:var(--subtle); line-height:1.6;">
+      Нет звонка «вы получили?». Нет угадывания интереса. Клиент нажимает сам — это сигнал намерения, не вежливый ответ. Утром открываю Telegram и вижу: встреча подтверждена.
     </div>
   </div>
 </section>
